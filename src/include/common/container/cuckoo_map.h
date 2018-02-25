@@ -57,6 +57,9 @@ class CuckooMap {
   // Extracts the corresponding value
   bool Find(const KeyType &key, ValueType &value) const;
 
+  // Extracts the corresponding value
+  ValueType GetValue(const KeyType &key) const;
+
   // Delete key from the cuckoo_map
   bool Erase(const KeyType &key);
 
