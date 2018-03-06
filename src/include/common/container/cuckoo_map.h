@@ -10,7 +10,6 @@
 //
 //===----------------------------------------------------------------------===//
 
-
 #pragma once
 
 #include <cstdlib>
@@ -31,7 +30,7 @@ namespace peloton {
 #define CUCKOO_MAP_DEFAULT_ARGUMENTS                    \
   template <typename KeyType, typename ValueType,       \
             typename HashType = DefaultHasher<KeyType>, \
-            typename PredType = std::equal_to<KeyType>>
+            typename PredType = std::equal_to<KeyType> >
 
 // CUCKOO_MAP_TYPE
 #define CUCKOO_MAP_TYPE CuckooMap<KeyType, ValueType, HashType, PredType>
@@ -43,7 +42,6 @@ namespace peloton {
 CUCKOO_MAP_DEFAULT_ARGUMENTS
 class CuckooMap {
  public:
-
   CuckooMap();
   CuckooMap(size_t initial_size);
   ~CuckooMap();
@@ -51,14 +49,14 @@ class CuckooMap {
   // Inserts a item
   bool Insert(const KeyType &key, ValueType value);
 
+  // Conditional Insert for a given predicate
+  void Upsert(const KeyType &key, ValueType &value);
+
   // Extracts item with high priority
   bool Update(const KeyType &key, ValueType value);
 
   // Extracts the corresponding value
   bool Find(const KeyType &key, ValueType &value) const;
-
-  // Extracts the corresponding value
-  ValueType GetValue(const KeyType &key) const;
 
   // Delete key from the cuckoo_map
   bool Erase(const KeyType &key);
@@ -85,7 +83,6 @@ class CuckooMap {
   GetConstIterator() const;
 
  private:
-
   // cuckoo map
   typedef cuckoohash_map<KeyType, ValueType, HashType, PredType> cuckoo_map_t;
 
